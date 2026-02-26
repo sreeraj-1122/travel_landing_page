@@ -1,0 +1,226 @@
+.services {
+  position: relative;
+  padding: 5rem 2rem;
+  overflow: hidden;
+  min-height: 70vh;
+}
+
+.services__dots {
+  position: absolute;
+  top: 4.375rem;
+  right: 2rem;
+  pointer-events: none;
+  z-index: 0;
+
+  img {
+    width: 180px;
+    height: auto;
+    opacity: 0.6;
+  }
+}
+
+.services__inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.services__header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.services__tagline {
+  font-family: var(--font-poppins);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-text);
+  line-height: normal;
+  margin-bottom: 0.5rem;
+}
+
+.services__title {
+  font-family: var(--font-volkhov);
+  font-weight: 700;
+  font-size: 3.125rem;
+  color: var(--color-dark);
+  line-height: normal;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5rem;
+  align-items: start;
+}
+
+.services__card {
+  position: relative;
+  width: 250px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  cursor: pointer;
+  z-index: 1;
+
+  > * {
+    position: relative;
+    z-index: 3;
+  }
+
+  // Red corner accent — bottom layer
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: -33px;
+    width: 100px;
+    height: 100px;
+    background: var(--color-primary);
+    border-radius: 30px 0 10px 0;
+    z-index: -2;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: all 0.35s ease;
+  }
+
+  // White card background — middle layer
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    border-radius: 36px;
+    z-index: -1;
+    transition: all 0.35s ease;
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &::after {
+      background: var(--color-white);
+      box-shadow:
+        0px 1.85px 3.15px rgba(0, 0, 0, 0.01),
+        0px 8.15px 6.52px rgba(0, 0, 0, 0.02),
+        0px 20px 13px rgba(0, 0, 0, 0.03),
+        0px 38.52px 25.48px rgba(0, 0, 0, 0.03),
+        0px 100px 80px rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+.services__card-icon {
+  position: relative;
+  width: 108px;
+  min-height: 120px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    object-fit: contain;
+  }
+
+  // Decorative colored square behind icon
+  &::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #fff1da;
+    z-index: -1;
+  }
+}
+
+// Per-card icon accent positioning
+.services__card--weather .services__card-icon::before {
+  right: 0;
+  bottom: 14px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.services__card--flights .services__card-icon::before {
+  top: 20px;
+  left: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 20px;
+}
+
+.services__card--events .services__card-icon::before {
+  right: 0;
+  top: 4px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.services__card--custom .services__card-icon::before {
+  bottom: 11px;
+  right: 0;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 20px;
+}
+
+.services__card-title {
+  font-family: var(--font-poppins);
+  font-weight: 500;
+  margin-bottom: 7px;
+  color: var(--color-text);
+}
+
+.services__card-desc {
+  font-family: var(--font-poppins);
+  font-weight: 400;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+// ── Responsive ─────────────────────────────────────────
+@media (max-width: 1024px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .services__title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .services__title {
+    font-size: 2rem;
+  }
+
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services__title {
+    font-size: 1.75rem;
+  }
+}
