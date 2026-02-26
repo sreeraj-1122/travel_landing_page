@@ -20,4 +20,5 @@
 2. Navigate to project directory
 
 3. Install dependencies
-
+   
+4. npm run dev
