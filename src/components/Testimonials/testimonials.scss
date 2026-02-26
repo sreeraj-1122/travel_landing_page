@@ -52,10 +52,16 @@
   }
 }
 
+.testimonials__content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .testimonials__cards {
   position: relative;
   width: 540px;
-  height: 360px;
+  height: 380px;
 }
 
 .testimonials__card {
@@ -75,13 +81,48 @@
     top: 0;
     left: 0;
     z-index: 2;
+    transition: all 0.5s ease-in-out;
   }
 
   &--back {
-    top: 205px;
     left: 40px;
+    bottom: 61px;
     opacity: 0.6;
     z-index: 1;
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+.testimonials__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-left: auto;
+}
+
+.testimonials__nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #bcbdbf;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-dark);
+  }
+}
+
+.testimonials__nav-arrow {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-left: 2px solid currentColor;
+  border-top: 2px solid currentColor;
+  transform: rotate(45deg);
+
+  &--down {
+    transform: rotate(225deg);
   }
 }
 
@@ -170,22 +211,45 @@
     font-size: 2.5rem;
   }
 
+  .testimonials__content {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    width: 100%;
+  }
+
   .testimonials__cards {
     width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    max-width: 504px;
+    height: 400px;
+    margin: 0 auto;
   }
+
   .testimonials__header {
-    margin-bottom: 10px;
+    margin-bottom: 2rem;
   }
+
   .testimonials__card {
-    position: static;
     width: 100%;
+    position: absolute;
 
     &--back {
-      opacity: 1;
+      opacity: 0.6;
+    }
+  }
+
+  .testimonials__nav {
+    flex-direction: row;
+    margin-left: 0;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .testimonials__nav-arrow {
+    transform: rotate(-45deg); 
+
+    &--down {
+      transform: rotate(135deg);
     }
   }
 }
@@ -218,7 +282,6 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
 
-    // Hide scrollbar cross-browser
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;

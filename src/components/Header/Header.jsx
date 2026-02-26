@@ -1,11 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Logo from "@/assets/Logo.jpg";
 import "./header.scss";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [selectedLang, setSelectedLang] = useState("EN");
+
+  const languages = ["EN", "ES", "FR"];
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { label: "Destinations", href: "#destinations" },
@@ -15,7 +26,9 @@ export default function Header() {
   ];
 
   return (
-    <header className={`header${open ? " open" : ""}`}>
+    <header
+      className={`header${open ? " open" : ""}${scrolled ? " header--scrolled" : ""}`}
+    >
       <div className="header__inner">
         <a href="#" className="header__logo" aria-label="Jadoo home">
           <Image src={Logo} alt="Jadoo Logo" width={115} height={34} priority />
@@ -38,9 +51,35 @@ export default function Header() {
           </div>
         </nav>
 
-        <div className="header__lang" aria-label="Language selector">
-          <span>EN</span>
-          <span className="header__lang-arrow" aria-hidden="true" />
+        <div
+          className={`header__lang${langOpen ? " open" : ""}`}
+          aria-label="Language selector"
+        >
+          <button
+            className="header__lang-toggle"
+            onClick={() => setLangOpen(!langOpen)}
+          >
+            <span>{selectedLang}</span>
+            <span className="header__lang-arrow" aria-hidden="true" />
+          </button>
+
+          {langOpen && (
+            <ul className="header__lang-dropdown">
+              {languages.map((lang) => (
+                <li key={lang}>
+                  <button
+                    onClick={() => {
+                      setSelectedLang(lang);
+                      setLangOpen(false);
+                    }}
+                    className={selectedLang === lang ? "active" : ""}
+                  >
+                    {lang}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <button
